@@ -2,6 +2,8 @@ const Course = require("../../../models/courses/index");
 const { find,findOne } = require("../../../helpers");
 const  express = require("express");
 const mongoose = require("mongoose");
+const {ObjectID} = require('../../../types');
+const { token } = require("morgan");
 
 const courseShow = async (req, res) => {
     try {
@@ -10,12 +12,12 @@ const courseShow = async (req, res) => {
             return res.status(404).send({ status: 404, message: 'No courses found.' });
         }
         var user,exams;
-        
+
         let allCourses = [courses.length];
         for(let i=0;i<courses.length;i++){
             var course ={
                 _id: "",
-                user_id: "",
+                userId: "",
                 courseName: "",
                 courseCode: "",
                 exams: [],
@@ -23,14 +25,14 @@ const courseShow = async (req, res) => {
                 
             };
             var element = courses[i];
-            user = await findOne("user", { _id: element.userId });
+            user = await findOne("user", { _id:req.body.userId}); 
             exams = await find("exam", { courseId: element._id });
 
-            course.userId= user.userId;
-            course._id= element._id;
+            course.userId= user._id;
+            course._id= element._id.toString();
             course.courseName= element.courseName;
             course.courseCode= element.courseCode;
-            course.exams= exams;
+            course.courseExams= exams;
             course.courseCRN= element.courseCRN;
             allCourses[i]=course;
         }

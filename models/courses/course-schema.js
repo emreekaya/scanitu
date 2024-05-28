@@ -25,7 +25,7 @@ const courseSchema = new mongoose.Schema({
     },
     courseExams: {
         type: Array,
-        required: true,
+        required: false,
         unique: false,
         trim: true,
         default: []

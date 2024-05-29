@@ -7,7 +7,7 @@ const editExam = require("./exam-edit");
 
 const { tokenVerification } = require("../../middleware/index.js");
 
-// ROUTES * /api/Exam/
+// ROUTES * /api/exam/
 router.post("/exam-create",tokenVerification, insertExam);
 router.post("/exam-delete",tokenVerification, deleteExam);
 router.post("/exam-edit",tokenVerification, editExam);

@@ -6,7 +6,7 @@ const db = {};
 db.mongoose = mongoose;
 
 db.user = require("./user");
-db.exam = require("./exam/index.js");
+db.exam = require("./exam/");
 db.course = require("./courses");
 
 

@@ -5,7 +5,7 @@ const deleteExam = require("./exam-delete");
 const showExam = require("./exam-show");
 const editExam = require("./exam-edit");
 
-const { tokenVerification } = require("../../middleware/index.js");
+const { tokenVerification } = require("../../middleware");
 
 // ROUTES * /api/exam/
 router.post("/exam-create",tokenVerification, insertExam);

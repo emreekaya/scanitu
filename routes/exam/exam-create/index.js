@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const Exam = require("../../../models/exam/exam");
+const Exam = require("../../../models/exam");
 
 const { insertNewDocument } = require("../../../helpers");
 const Joi = require("joi");

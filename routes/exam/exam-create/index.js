@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const { insertNewDocument } = require("../../helpers");
+const { insertNewDocument } = require("../../../helpers");
 const Joi = require("joi");
-const { ObjectID } = require("../../types");
+const { ObjectID } = require("../../../types");
 
 const schema = Joi.object({
   courseId: ObjectID,
@@ -15,7 +15,7 @@ const insertExam = async (req, res) => {
   const { courseId,examName,questionNumber } = await req.body;
   try {
     const new_exam = {
-      userId: userId,
+      //userId: userId,
       courseId: courseId,
       examName: examName,
       questionNumber: questionNumber,

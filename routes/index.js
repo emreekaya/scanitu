@@ -1,11 +1,11 @@
 const express = require("express");
 const { tokenVerification } = require("../middleware");
 const auth = require("./auth");
-const exam = require("./exam/exams.js")
+const exam = require("./exam");
 const course = require("./courses");
 const getUserProfile = require("./user-profile/getUserProfile.js");
 const router = express.Router();
-
+//const user = require("./user");
 
 
 // AUTH Routes * /api/auth/*

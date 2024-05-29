@@ -1,10 +1,10 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const { updateDocument, findOne } = require("../../helpers");
+const { updateDocument, findOne } = require("../../../helpers");
 const Joi = require("joi");
-const { ObjectID } = require("../../types");
-const { exam } = require("../../models");
+const { ObjectID } = require("../../../types");
+const { exam } = require("../../../models");
 
 const schema = Joi.object({
   examId: ObjectID,

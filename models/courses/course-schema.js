@@ -6,7 +6,7 @@ const courseSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        unique: true,
+        unique: false,
         trim: true,
     },
     courseName: {

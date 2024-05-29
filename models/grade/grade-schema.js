@@ -6,13 +6,13 @@ const gradeSchema = new mongoose.Schema({
     examId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        unique: true,
+        unique: false,
         ref: 'exam'
     },
     studentId: {
         type: Number,
         required: true,
-        unique: true,
+        unique: false,
     },
     scores: {
         type: Array,

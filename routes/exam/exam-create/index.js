@@ -14,8 +14,9 @@ const schema = Joi.object({
 
 const insertExam = async (req, res) => {
   const { courseId,examName,questionNumber } = await req.body;
-  const exams = await Exam.find({examName:req.body.examName});
-  if(exams.length == 0) {
+  const courses = await Exam.find({courseId:req.body.courseId,examName:req.body.examName});
+
+  if(courses.length === 0) {
     try {
       const new_exam = {
         //userId: userId,
@@ -32,7 +33,7 @@ const insertExam = async (req, res) => {
       return res.status(400).send({ status: 400, message: e.message });
     }
   }else
-  return res.status(404).send({ status: 404, message: 'Exam name already exist' });
+  return res.status(404).send({ status: 404, message: 'There is already the same exam for the course' });
 
   
 };

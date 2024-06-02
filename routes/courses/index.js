@@ -6,6 +6,6 @@ const courseCreate = require("./course-create");
 const { tokenVerification } = require("../../middleware");
 
 // ROUTES * /api/courses/
-router.get("/course-show",tokenVerification, courseShow);
+router.post("/course-show",tokenVerification, courseShow);
 router.post("/course-create",tokenVerification, courseCreate);
 module.exports = router;

@@ -36,7 +36,7 @@ const showExam = async (req, res) => {
         //exams = await find("exam", { courseId: element._id });
         exam._id = element._id;
         exam.courseId = courseId;
-        exam.examName = element.examName.toString();
+        exam.examName = element.examName;
         exam.questionNumber = element.questionNumber;
         examArray[i] = exam;
       }

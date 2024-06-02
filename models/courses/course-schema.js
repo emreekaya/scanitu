@@ -23,13 +23,6 @@ const courseSchema = new mongoose.Schema({
         trim: true,
         maxLength: 50
     },
-    courseExams: {
-        type: Array,
-        required: false,
-        unique: false,
-        trim: true,
-        default: []
-    },
     courseCRN: {
         type: Number,
         required: true,

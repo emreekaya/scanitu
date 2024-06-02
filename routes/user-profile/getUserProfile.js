@@ -8,7 +8,7 @@ const schema = Joi.object({
 
 const getUserProfile = async (req, res) => {
 
-  const { userId, userName } = await req.body;
+  const { userName } = await req.body;
   try {
   
     var numOfCourse =0;

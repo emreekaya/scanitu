@@ -38,5 +38,7 @@ app.use("*", (req, res) => {
 });
 
 let PORT = process.env.PORT || 3030;
+let HOST = "0.0.0.0"
 
-app.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`));
+
+app.listen(PORT,HOST, () => console.log(`Server is running on PORT ${PORT} and HOST ${HOST}`));

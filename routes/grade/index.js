@@ -11,6 +11,5 @@ const { tokenVerification } = require("../../middleware");
 router.post("/grade-create",tokenVerification, insertGrade);
 router.post("/grade-delete",tokenVerification, deleteGrade);
 router.post("/grade-edit",tokenVerification, editGrade);
-router.post("/grade-show",tokenVerification, showGrade);
-
+router.post("/grade-show",tokenVerification, showGrade)
 module.exports = router;

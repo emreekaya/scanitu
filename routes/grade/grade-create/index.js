@@ -29,7 +29,7 @@ const insertGrades = async (req, res) => {
   }
 
   try {
-    // Sınavın soru sayısını al
+    // Sınavın soru sayısını alıyoruz
     const exam = await Exam.findById(examId);
     if (!exam) {
       return res.status(404).send({ status: 404, message: `Exam with ID ${examId} not found.` });
@@ -50,10 +50,10 @@ const insertGrades = async (req, res) => {
       const new_grade = {
         examId: ObjectID(examId),
         studentId: studentId,
-        scores: Array(questionNumber).fill(null) // Soru sayısına göre null ile doldur
+        scores: Array(questionNumber).fill(null) // Soru sayısına göre null ile dolduruyoruz
       };
 
-      // Gelen scores objesini array formatına çevir
+      // Gelen scores objesini array formatına çeviriyoruz
       if (scores && Object.keys(scores).length > 0) {
         for (const [key, value] of Object.entries(scores)) {
           const index = parseInt(key, 10) - 1; // Key 1-based index, array 0-based index

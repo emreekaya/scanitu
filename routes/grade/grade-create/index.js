@@ -2,40 +2,61 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const Grade = require("../../../models/grade");
-
 const { insertNewDocument } = require("../../../helpers");
 const Joi = require("joi");
 const { ObjectID } = require("../../../types");
 
 const schema = Joi.object({
   examId: ObjectID,
-  studentId: Joi.string().required(),
-  scores: Joi.array().required(),
+  students: Joi.array().items(
+    Joi.object({
+      studentId: Joi.string().required(),
+      scores: Joi.object().pattern(
+        Joi.string().pattern(/^\d+$/),
+        Joi.number()
+      ).optional()
+    })
+  ).required()
 });
 
-const insertGrade = async (req, res) => {
-  const { examId,studentId,scores } = await req.body;
-  const grades = await Grade.find({studentId: req.body.studentId,examId: req.body.examId});
-  console.log("grade",grades);
-  if(grades.length == 0) {
-    try {
+const insertGrades = async (req, res) => {
+  const { examId, students } = req.body;
+
+  const { error } = schema.validate({ examId, students });
+  if (error) {
+    return res.status(400).send({ status: 400, message: error.details[0].message });
+  }
+
+  try {
+    const newGrades = [];
+
+    for (const student of students) {
+      const { studentId, scores } = student;
+
+      // Check if the grade already exists
+      const existingGrade = await Grade.findOne({ studentId, examId });
+      if (existingGrade) {
+        return res.status(404).send({ status: 404, message: `The student with ID ${studentId} already has a grade for this exam.` });
+      }
+
       const new_grade = {
-        examId: examId,
+        examId: ObjectID(examId),
         studentId: studentId,
-        scores: scores
       };
-
-      const user = await insertNewDocument("grade", new_grade);
-      
-      
-      return res.status(200).send({ status: 200, new_grade });
-    } catch (e) {
-      return res.status(400).send({ status: 400, message: e.message });
+      if (scores && Object.keys(scores).length > 0) {
+        new_grade.scores = scores;
+      }
+      newGrades.push(new_grade);
     }
-  }else
-  return res.status(404).send({ status: 404, message: 'The student already has this exam grade.'});
 
-  
+    // Insert all new grades at once
+    const insertedGrades = await Grade.insertMany(newGrades);
+
+    return res.status(200).send({ status: 200, insertedGrades });
+
+  } catch (e) {
+    return res.status(400).send({ status: 400, message: e.message });
+  }
 };
 
-module.exports = insertGrade;
+module.exports = insertGrades;

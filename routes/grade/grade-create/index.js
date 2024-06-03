@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
 const Grade = require("../../../models/grade");
+const Exam = require("../../../models/exam"); // Exam modelini dahil ediyoruz
 const { insertNewDocument } = require("../../../helpers");
 const Joi = require("joi");
 const { ObjectID } = require("../../../types");
@@ -13,7 +14,7 @@ const schema = Joi.object({
       studentId: Joi.string().required(),
       scores: Joi.object().pattern(
         Joi.string().pattern(/^\d+$/),
-        Joi.number()
+        Joi.alternatives().try(Joi.number(), Joi.string().allow(null, '').optional())
       ).optional()
     })
   ).required()
@@ -28,6 +29,13 @@ const insertGrades = async (req, res) => {
   }
 
   try {
+    // Sınavın soru sayısını al
+    const exam = await Exam.findById(examId);
+    if (!exam) {
+      return res.status(404).send({ status: 404, message: `Exam with ID ${examId} not found.` });
+    }
+    const questionNumber = exam.questionNumber;
+
     const newGrades = [];
 
     for (const student of students) {
@@ -42,10 +50,19 @@ const insertGrades = async (req, res) => {
       const new_grade = {
         examId: ObjectID(examId),
         studentId: studentId,
+        scores: Array(questionNumber).fill(null) // Soru sayısına göre null ile doldur
       };
+
+      // Gelen scores objesini array formatına çevir
       if (scores && Object.keys(scores).length > 0) {
-        new_grade.scores = scores;
+        for (const [key, value] of Object.entries(scores)) {
+          const index = parseInt(key, 10) - 1; // Key 1-based index, array 0-based index
+          if (index >= 0 && index < questionNumber) {
+            new_grade.scores[index] = value === "" ? null : value;
+          }
+        }
       }
+
       newGrades.push(new_grade);
     }
 

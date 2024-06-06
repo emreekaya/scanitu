@@ -24,7 +24,6 @@ const courseCreate = async (req, res) => {
 
     };
 
-    console.log(req.body);
     
     const new_course = {
       userId: await  req.body.userId,

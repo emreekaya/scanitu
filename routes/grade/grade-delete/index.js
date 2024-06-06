@@ -13,7 +13,6 @@ const schema = Joi.object({
 const deleteGrade = async (req, res) => {
   const {gradeId} = await req.body;
   const { error } = schema.validate({ gradeId });
-  console.log(gradeId);
   if (error) {
     return res.status(400).send({ status: 400, message: error.details[0].message });
   }

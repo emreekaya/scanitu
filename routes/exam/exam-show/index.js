@@ -16,37 +16,29 @@ const showExam = async (req, res) => {
       return res.status(400).send({
         status: 400, message: 'courseId is required'
       });
+
+    }
+    const courseData = await findOne("course", { _id: ObjectID(courseId) });
+    if (!courseData) {
+      return res.status(404).send({ status: 404, message: `Course with ID ${courseId} not found.` });
     }
     var searchQuery = {};
     searchQuery["courseId"] = courseId;
-
     const exams = await find("exam", searchQuery);
-    console.log(exams, "exams");
-    if (courseId && exams.length > 0) {
-      var examArray = [];
-      for (let i = 0; i < exams.length; i++) {
-        var exam = {
-          _id: "",
-          courseId: "",
-          examName: "",
-          questionNumber: 0
-        };
-        var element = exams[i];
-        //exams = await findOne("exams", {courseId: req.body});
-        //exams = await find("exam", { courseId: element._id });
-        exam._id = element._id;
-        exam.courseId = courseId;
-        exam.examName = element.examName;
-        exam.questionNumber = element.questionNumber;
-        examArray[i] = exam;
-      }
-      return res.status(200).send({ status: 200, examArray });
-
+    if (exams.length > 0) {
+      const examArray = exams.map(exam => ({
+        _id: exam._id,
+        courseId: exam.courseId,
+        examName: exam.examName,
+        questionNumber: exam.questionNumber
+      }));
+      return res.status(200).send({ status: 200, courseName: courseData.courseName, examArray });
+    }
+    else{
+      return res.status(404).send({ status: 404, message: "No exams found for this course" });
     }
   } catch (e) {
-    return res.status(400).send({
-      status: 400, message: 'Sonuc yok'
-    });
+    return res.status(400).send({ status: 400, message: e.message });
   }
 };
 

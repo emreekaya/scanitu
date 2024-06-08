@@ -11,13 +11,17 @@ examId: ObjectID,
 
 const showGrade = async (req, res) => {
   try {
-    const { examId, studentId } = await req.body;
-    if (!examId || !studentId) {
+    const { examId } = await req.body;
+    if (!examId ) {
       return res.status(400).send({
-        status: 400, message: 'examId and studentId is required'
+        status: 400, message: 'examId and is required'
       });
     }
-    const searchQuery = { examId, studentId };
+    const examData = await findOne("exam", { _id: ObjectID(examId) });
+    if (!examData) {
+      return res.status(404).send({ status: 404, message: `Exam with ID ${examId} not found.` });
+    }
+    const searchQuery = { examId };
     const grades = await find("grade", searchQuery);
 
     if (grades.length > 0) {
@@ -34,7 +38,7 @@ const showGrade = async (req, res) => {
         return res.status(404).send({ status: 404, message: "there is no score for this student" });
       }
 
-      return res.status(200).send({ status: 200, gradeArray });
+      return res.status(200).send({ status: 200, examName: examData.examName, gradeArray });
     } else {
       return res.status(404).send({ status: 404, message: "there is no score for this student" });
     }

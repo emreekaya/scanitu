@@ -10,4 +10,8 @@ module.exports = {
   MAIL_PORT: process.env.MAIL_PORT,
   MAIL_USER: process.env.MAIL_USER,
   MAIL_PASS: process.env.MAIL_PASS,
+  SAML_PATH: process.env.SAML_PATH || '/login/callback',
+  SAML_ENTRY_POINT: process.env.SAML_ENTRY_POINT || 'https://your-idp-url.com/sso',
+  SAML_ISSUER: process.env.SAML_ISSUER || 'your-app-identifier',
+  SAML_CERT: process.env.SAML_CERT || 'YOUR_IDP_CERTIFICATE'
 };

@@ -10,7 +10,6 @@ const abetSchema = new mongoose.Schema({
     },
     subCategory: {
         type: String,
-        required: true,
         unique: false,
         trim: true,
     },

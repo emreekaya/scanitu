@@ -11,6 +11,6 @@ const { tokenVerification } = require("../../middleware");
 router.post("/abet-create",tokenVerification, insertAbet);
 //router.post("/abet-delete",tokenVerification, deleteAbet);
 //router.post("/abet-edit",tokenVerification, editAbet);
-//router.post("/abet-show",tokenVerification, showAbet);
+router.get("/abet-show",tokenVerification, showAbet);
 
 module.exports = router;

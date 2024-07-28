@@ -9,8 +9,20 @@ const showAbet = async (req, res) => {
       return res.status(404).send({ status: 404, message: "No ABET data found" });
     }
 
-    // Verileri ana kategori, alt kategori ve kriter bazında gruplama
+    // Verileri ana kategori, alt kategori ve kriter bazında gruplama ve sıralama
     const structuredAbetList = {};
+    const categoryMap = {};
+    let categoryIndex = 0;
+
+    abetList.sort((a, b) => {
+      if (a.mainCategory < b.mainCategory) return -1;
+      if (a.mainCategory > b.mainCategory) return 1;
+      if (a.subCategory < b.subCategory) return -1;
+      if (a.subCategory > b.subCategory) return 1;
+      if (a.criteriaCode < b.criteriaCode) return -1;
+      if (a.criteriaCode > b.criteriaCode) return 1;
+      return 0;
+    });
 
     abetList.forEach(item => {
       const mainCategory = item.mainCategory;
@@ -20,20 +32,33 @@ const showAbet = async (req, res) => {
         description: item.criteriaDescription
       };
 
-      if (!structuredAbetList[mainCategory]) {
-        structuredAbetList[mainCategory] = {
-          subCategories: {},
+      if (!categoryMap[mainCategory]) {
+        categoryMap[mainCategory] = {
+          categoryCode: String.fromCharCode(65 + categoryIndex), // A, B, C, ...
+          subCategoryIndex: 0,
+          subCategories: [],
           criteria: []
         };
+        structuredAbetList[mainCategory] = categoryMap[mainCategory];
+        categoryIndex++;
       }
 
       if (subCategory) {
-        if (!structuredAbetList[mainCategory].subCategories[subCategory]) {
-          structuredAbetList[mainCategory].subCategories[subCategory] = [];
+        let subCategoryObj = categoryMap[mainCategory].subCategories.find(subCat => subCat.subCategory === subCategory);
+        
+        if (!subCategoryObj) {
+          const subCategoryCode = `${categoryMap[mainCategory].categoryCode}${++categoryMap[mainCategory].subCategoryIndex}`;
+          subCategoryObj = {
+            subCategory,
+            subCategoryCode,
+            criteria: []
+          };
+          categoryMap[mainCategory].subCategories.push(subCategoryObj);
         }
-        structuredAbetList[mainCategory].subCategories[subCategory].push(criteria);
+
+        subCategoryObj.criteria.push(criteria);
       } else {
-        structuredAbetList[mainCategory].criteria.push(criteria);
+        categoryMap[mainCategory].criteria.push(criteria);
       }
     });
 

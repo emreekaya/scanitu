@@ -9,7 +9,7 @@ const { tokenVerification } = require("../../middleware");
 
 // ROUTES * /api/Abet/
 router.post("/abet-create",tokenVerification, insertAbet);
-//router.post("/abet-delete",tokenVerification, deleteAbet);
+router.post("/abet-delete",tokenVerification, deleteAbet);
 //router.post("/abet-edit",tokenVerification, editAbet);
 router.get("/abet-show",tokenVerification, showAbet);
 

@@ -7,7 +7,7 @@ const editAbet = require("./abet-edit");
 
 const { tokenVerification } = require("../../middleware");
 
-// ROUTES * /api/Abet/
+// ROUTES * /api/abet/
 router.post("/abet-create",tokenVerification, insertAbet);
 router.post("/abet-delete",tokenVerification, deleteAbet);
 router.post("/abet-edit",tokenVerification, editAbet);

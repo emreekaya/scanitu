@@ -14,14 +14,13 @@ const schema = Joi.object({
 });
 
 const courseCreate = async (req, res) => {
-  const { userId, courseName,courseCode,courseCRN, } = await req.body;
+  const { userId, courseName,courseCode,courseCRN } = await req.body;
   try {
     const newCourse = {
       userId,
       courseName,
       courseCode,
       courseCRN,
-
     };
 
     
@@ -30,7 +29,6 @@ const courseCreate = async (req, res) => {
       courseName: await  req.body.courseName,
       courseCode: await  req.body.courseCode,
       courseCRN: await  req.body.courseCRN,
-
     };
     const course = await insertNewDocument("course", new_course);
 

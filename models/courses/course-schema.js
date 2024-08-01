@@ -30,6 +30,12 @@ const courseSchema = new mongoose.Schema({
         trim: true,
         maxLength: 10
 
-    }
+    },
+    // studentId:{
+    //     type: Array,
+    //     required:true,
+    //     trim:true,
+    //     default:[]
+    // },
 });
 module.exports = courseSchema;

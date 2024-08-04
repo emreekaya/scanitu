@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const schemaType = require("../../types");
+const { ref } = require("joi");
 
 const courseSchema = new mongoose.Schema({
 
@@ -31,11 +32,15 @@ const courseSchema = new mongoose.Schema({
         maxLength: 10
 
     },
+    students: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'student'
+    }]
     // studentId:{
-    //     type: Array,
-    //     required:true,
+    //     type:mongoose.Schema.Types.ObjectID ,
+    //     required:false,
     //     trim:true,
-    //     default:[]
+    //     ref:'student'
     // },
 });
 module.exports = courseSchema;

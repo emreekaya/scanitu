@@ -5,6 +5,7 @@ const { insertNewDocument, findOne } = require("../../../helpers");
 const Joi = require("joi");
 const { send_email } = require("../../../lib");
 const { ObjectID } = require("../../../types");
+const { student } = require("../../../models");
 const schema = Joi.object({
   courseName: Joi.string().required(),
   courseCode: Joi.string().required(),

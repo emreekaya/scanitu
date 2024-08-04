@@ -1,14 +1,14 @@
 const Course = require("../../../models/courses/index");
 const { ObjectID } = require("../../../types");
-const { find } = require("../../../helpers");
+const { find,findOne } = require("../../../helpers");
 const Joi = require("joi");
 const express = require("express");
 const mongoose = require("mongoose");
+//const { student } = require("../../../models");
 
 const schema = Joi.object({
   userId: Joi.string().alphanum().length(24).required()
 });
-
 const showCourse = async (req, res) => {
   try {
     const { error } = schema.validate(req.body);
@@ -17,13 +17,16 @@ const showCourse = async (req, res) => {
         status: 400, message: error.details[0].message
       });
     }
-
+    //studentId = await findOne("student", studentId);
     const { userId } = req.body;
     console.log("Received userId:", userId);
     var searchQuery = { userId: mongoose.Types.ObjectId(userId) };
+    //var searchQueryy = { studentId: mongoose.Types.ObjectId(studentId) };
 
     const courses = await find("course", searchQuery);
-    console.log(courses, "courses");
+    //const students = await find("student", searchQueryy);
+    //console.log(students, "students");
+    //console.log(courses, "courses");
     if (courses.length > 0) {
       var courseArray = [];
       for (let i = 0; i < courses.length; i++) {
@@ -33,6 +36,7 @@ const showCourse = async (req, res) => {
           courseName: "",
           courseCode: "",
           courseCRN: 0
+          //studentId: ""
         };
         var element = courses[i];
         course._id = element._id;
@@ -40,6 +44,7 @@ const showCourse = async (req, res) => {
         course.courseName = element.courseName;
         course.courseCode = element.courseCode;
         course.courseCRN = element.courseCRN;
+        //course.studentId = element.studentId;
         courseArray[i] = course;
       }
       return res.status(200).send({ status: 200, courseArray });

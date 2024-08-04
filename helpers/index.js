@@ -7,6 +7,7 @@ const find = async (modelDb, queryObj) =>
 
 const findOne = async (modelDb, queryObj) =>
   await Models[modelDb].findOne(queryObj).exec();
+
 const findOneAndSelect = async (modelDb, queryObj, selectQuery) =>
   await Models[modelDb].findOne(queryObj).select(selectQuery).exec();
 
@@ -15,12 +16,13 @@ const insertNewDocument = async (modelDb, storeObj) => {
   return await data.save();
 };
 
-const updateDocument = async (modelDb, updateQuery, setQuery) =>{
+const updateDocument = async (modelDb, updateQuery, setQuery) => {
   return await Models[modelDb].findOneAndUpdate(
     updateQuery,
-    { $set: setQuery },
-    { new: true });
-  }
+    setQuery,
+    { new: true }
+  ).exec();
+};
 
 const customUpdate = async (modelDb, updateQuery, setQuery) =>
   await Models[modelDb].updateOne(updateQuery, setQuery);

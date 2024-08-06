@@ -6,7 +6,7 @@ const course = require("./courses");
 const grade = require("./grade");
 const abet = require("./abet");
 const student = require("./student");
-const getUserProfile = require("./user-profile/getUserProfile.js");
+const userProfile = require("./user-profile");
 //const user = require("./user");
 
 const router = express.Router();
@@ -21,5 +21,5 @@ router.use("/courses",course);
 router.use("/grade",grade)
 router.use("/abet",abet);
 router.use("/student",student);
-router.post("/userProfile", tokenVerification, getUserProfile);
+router.use("/user-profile", userProfile);
 module.exports = router;

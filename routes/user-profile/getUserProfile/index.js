@@ -1,6 +1,6 @@
-const {findOne,find } = require("../../helpers");
+const {findOne,find } = require("../../../helpers");
 const Joi = require("joi");
-const { ObjectID } = require("../../types");
+const { ObjectID } = require("../../../types");
 
 const schema = Joi.object({
   userName: Joi.string().required(),

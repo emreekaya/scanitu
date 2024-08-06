@@ -14,14 +14,9 @@ const showAbet = async (req, res) => {
     const categoryMap = {};
     let categoryIndex = 0;
 
+    // Kriter kodlarına göre alfabetik olarak sıralama
     abetList.sort((a, b) => {
-      if (a.mainCategory < b.mainCategory) return -1;
-      if (a.mainCategory > b.mainCategory) return 1;
-      if (a.subCategory < b.subCategory) return -1;
-      if (a.subCategory > b.subCategory) return 1;
-      if (a.criteriaCode < b.criteriaCode) return -1;
-      if (a.criteriaCode > b.criteriaCode) return 1;
-      return 0;
+      return a.criteriaCode.localeCompare(b.criteriaCode);
     });
 
     abetList.forEach(item => {
@@ -46,7 +41,7 @@ const showAbet = async (req, res) => {
 
       if (subCategory) {
         let subCategoryObj = categoryMap[mainCategory].subCategories.find(subCat => subCat.subCategory === subCategory);
-        
+
         if (!subCategoryObj) {
           const subCategoryCode = `${categoryMap[mainCategory].categoryCode}${++categoryMap[mainCategory].subCategoryIndex}`;
           subCategoryObj = {

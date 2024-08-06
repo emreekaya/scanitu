@@ -8,6 +8,7 @@ const schema = Joi.object({
   userName: Joi.string().required(),
   firstLastName: Joi.string().required(),
   password: Joi.string().pattern(new RegExp("^[a-zA-Z0-9]{6,30}$")),
+  email: Joi.string().email().required(),
 });
 
 const signUpUser = async (req, res) => {
@@ -26,6 +27,7 @@ const signUpUser = async (req, res) => {
       userName: await  req.body.userName,
       firstLastName: await req.body.firstLastName,
       password: bcrypt.hashSync(password, bcrypt.genSaltSync(10)),
+      email: await req.body.email,
     };
     const user = await insertNewDocument("user", new_user);
     let token = jwt.sign({ id: user._id }, SECRET);

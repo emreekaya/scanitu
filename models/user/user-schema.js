@@ -22,6 +22,12 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxLength: 100
   },
+  email: {
+    type: String,
+    required: true,
+    trim: true,
+    maxLength: 100
+  },
   timestamp: {
     type: Date,
     default: Date.now

@@ -17,6 +17,7 @@ const getUserProfile = async (req, res) => {
       userId: user._id,
       userName: user.userName,
       firstLastName: user.firstLastName,
+      email: user.email,
     };
     return res.status(200).send({ status: 200,userProfile });
   } catch (e) {

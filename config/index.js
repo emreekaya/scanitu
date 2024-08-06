@@ -10,8 +10,13 @@ module.exports = {
   MAIL_PORT: process.env.MAIL_PORT,
   MAIL_USER: process.env.MAIL_USER,
   MAIL_PASS: process.env.MAIL_PASS,
+  
   SAML_PATH: process.env.SAML_PATH || '/login/callback',
-  SAML_ENTRY_POINT: process.env.SAML_ENTRY_POINT || 'https://your-idp-url.com/sso',
-  SAML_ISSUER: process.env.SAML_ISSUER || 'your-app-identifier',
-  SAML_CERT: process.env.SAML_CERT || 'YOUR_IDP_CERTIFICATE'
+  SAML_ENTRY_POINT: process.env.SAML_ENTRY_POINT || 'https://itu-edu-tr.zoom.us/saml/SSO',
+  SAML_ISSUER: process.env.SAML_ISSUER || 'https://itu-edu-tr.zoom.us/',
+  SAML_CERT: process.env.SAML_CERT || `MIIGXTCCBUWgAwIBAgIQCLgQc9Z8Mn06Q0tiGbaLyjANBg
+  kqhkiG9w0BAQsFADBZMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMTMwMQYDVQQDEypEaW
+  dpQ2VydCBHbG9iYWwgRzIgVExTIFJTQSBTSEEyNTYgMjAyMCBDQTEwHhcNMjEwMTMwMDAwMDAwWhcNMjIwMjA
+  yMjM1OTU5WjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxK
+  DAmBgNVBAoTH1pvb20gVmlkZW8gQ29tbXVuaWNhdGlvbnMsIEluYy4xEjAQBgNVBAMMCSouem9vbS51`
 };

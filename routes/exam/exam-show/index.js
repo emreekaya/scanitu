@@ -30,7 +30,9 @@ const showExam = async (req, res) => {
         _id: exam._id,
         courseId: exam.courseId,
         examName: exam.examName,
-        questionNumber: exam.questionNumber
+        questionNumber: exam.questionNumber,
+        totalExamScore: exam.totalExamScore,
+        questionDetails: exam.questionDetails
       }));
       return res.status(200).send({ status: 200, courseName: courseData.courseName, examArray });
     }

@@ -28,6 +28,7 @@ const showAbet = async (req, res) => {
       const mainCategory = item.mainCategory;
       const subCategory = item.subCategory;
       const criteria = {
+        _id: item._id,
         code: item.criteriaCode,
         description: item.criteriaDescription
       };

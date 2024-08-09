@@ -5,7 +5,7 @@ const getUserProfile = require("./getUserProfile");
 const editUserProfile = require("./editUserProfile");
 
 //Routes * /api/user-profile/
-router.post("/editUserProfile", tokenVerification, editUserProfile);
+router.post("/editUserProfile", editUserProfile);
 router.post("/getuserProfile", tokenVerification, getUserProfile);
 
 module.exports = router;

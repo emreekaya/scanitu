@@ -1,4 +1,4 @@
-const { findOne,updateDocument } = require("../../../helpers");
+const { findOne, updateDocument } = require("../../../helpers");
 const Joi = require("joi");
 const { ObjectID } = require("../../../types");
 
@@ -21,7 +21,7 @@ const editUserProfile = async (req, res) => {
     // Kullanıcıyı güncelle
     const updatedUser = await updateDocument(
       "user",
-      { _id: ObjectID },
+      { _id: ObjectID(userId) },  // ObjectID fonksiyonu çağrılarak string userId ObjectID'ye dönüştürülür
       { $set: { userName, firstLastName, email } }
     );
 

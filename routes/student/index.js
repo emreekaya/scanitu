@@ -11,6 +11,6 @@ const {tokenVerification} = require("../../middleware");
 router.post("/student-create",tokenVerification, upload.single('file'),insertStudent);
 //router.post("/student-delete",tokenVerification,deleteStudent);
 // router.post("student-edit",tokenVerification,editStudent);
-// router.get("student-show",tokenVerification,showStudent);
+router.post("/student-show",tokenVerification,showStudent);
 
 module.exports = router;

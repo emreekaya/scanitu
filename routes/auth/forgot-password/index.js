@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const { findOne, updateDocument } = require("../../../helpers");
-const { sendEmail } = require("../../../utils/email"); // Email gönderme fonksiyonunuz
+const { sendEmail } = require("../../../utils/email"); // email gönderme fonksiyonu
 const Joi = require('joi');
 
 const schema = Joi.object({

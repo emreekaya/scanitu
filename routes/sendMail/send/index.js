@@ -1,7 +1,7 @@
 const express = require('express');
 const { exportGradesAndSendEmail } = require('../../../export');
 const { getUserProfile } = require('../../user-profile/getUserProfile');
-const { find, findOne } = require('../../../helpers'); // find ve findOne fonksiyonlarını buradan alıyorsunuz
+const { find, findOne } = require('../../../helpers');
 const { ObjectID } = require('../../../types');
 const router = express.Router();
 

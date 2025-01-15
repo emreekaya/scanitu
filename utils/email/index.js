@@ -14,7 +14,7 @@ const transporter = nodemailer.createTransport({
 
 const sendEmailWithAttachment = async (to, subject, text, attachmentPath) => {
   const mailOptions = {
-    from: 'kaya22@itu.edu.tr',
+    from: '<user email>',
     to: to,
     subject: subject,
     text: text,

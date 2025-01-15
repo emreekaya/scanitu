@@ -9,8 +9,8 @@ const smtpConfig = {
     host: 'smtp.itu.edu.tr',
     port: 587,
     auth: {
-      user: 'kaya22@itu.edu.tr', // SMTP kullanıcı adı
-      pass: 'Em.ka.1519', // SMTP şifresi
+      user: 'user mail', // SMTP kullanıcı adı
+      pass: 'password', // SMTP şifresi
     },
 };
 
@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport(smtpConfig);
 
 const sendEmailWithAttachment = async (to, subject, text, filePath) => {
   const mailOptions = {
-    from: 'kaya22@itu.edu.tr',
+    from: 'user mail',
     to,
     subject,
     text,

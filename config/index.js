@@ -20,7 +20,7 @@ module.exports = {
   yMjM1OTU5WjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxK
   DAmBgNVBAoTH1pvb20gVmlkZW8gQ29tbXVuaWNhdGlvbnMsIEluYy4xEjAQBgNVBAMMCSouem9vbS51`,
    smtpConfig: {
-     user: "kaya22@itu.edu.tr", // ITU SMTP kullanıcı adı
-     pass: "Em.ka.1519", // ITU SMTP şifresi
+     user: "<user mail>", // ITU SMTP kullanıcı adı
+     pass: "password", // ITU SMTP şifresi
    }
 };

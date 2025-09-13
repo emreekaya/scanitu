@@ -5,7 +5,7 @@ module.exports = {
   DB_NAME: process.env.DB_NAME,
   DB_USER: process.env.DB_USER,
   DB_PASS: process.env.DB_PASS,
-  SECRET: "HTP",
+  SECRET: process.env.JWT_SECRET || "HTP-fallback-change-in-production",
   MAIL_HOST: process.env.MAIL_HOST,
   MAIL_PORT: process.env.MAIL_PORT,
   MAIL_USER: process.env.MAIL_USER,
@@ -20,7 +20,7 @@ module.exports = {
   yMjM1OTU5WjBzMQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTERMA8GA1UEBxMIU2FuIEpvc2UxK
   DAmBgNVBAoTH1pvb20gVmlkZW8gQ29tbXVuaWNhdGlvbnMsIEluYy4xEjAQBgNVBAMMCSouem9vbS51`,
    smtpConfig: {
-     user: "<user mail>", // ITU SMTP kullanıcı adı
-     pass: "password", // ITU SMTP şifresi
+     user: process.env.SMTP_USER || "<user mail>", // ITU SMTP kullanıcı adı
+     pass: process.env.SMTP_PASS || "password", // ITU SMTP şifresi
    }
 };
